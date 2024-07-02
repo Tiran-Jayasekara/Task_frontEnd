@@ -1,0 +1,67 @@
+/* Header part */
+.body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0%;
+}
+.container {
+  width: fit-content;
+  margin: 40px;
+  align-items: end;
+  background-color: bisque;
+  padding: 30px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.btn {
+  align-items: center;
+  font: bold;
+  margin-left: 10px;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: blue;
+  border-radius: 10px;
+  border: none;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 10px;
+    padding: 20px;
+    align-items: center;
+  }
+  .btn {
+    text-align: center;
+    width: fit-content;
+  }
+}
+
+.btn:hover {
+  background-color: blue;
+  cursor: pointer;
+}
+
+/* Grid Part */
+.grid_main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.grid {
+  width: 45%;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .grid {
+      width: 100%;
+      margin: 10px;
+    }
+  }
