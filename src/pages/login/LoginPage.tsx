@@ -12,16 +12,18 @@ import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
+import { useUser } from "api/services/useUser";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import "./login.css";
-import { useTokenStore, useUserStore } from "store";
+import { useRouter } from "hooks/routes/useRouter";
+import { useUserStore } from "states/userStore";
+import { useTokenStore } from "states/tokenStore";
 const theme = {};
 
-export default function SignIn() {
-  const navigate = useNavigate();
+const LoginPage = () => {
+  const { navigate } = useRouter();
+
   const setUser = useUserStore((state) => state.setUser);
 
   const [email, setEmail] = React.useState<string>("");
@@ -31,8 +33,10 @@ export default function SignIn() {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState<string>("");
   const [passwordErrorMessage, setPasswordErrorMessage] =
     React.useState<string>("");
+  const { loginUser } = useUser();
 
-  const Login = () => {
+  // User Login Function
+  const Login = async () => {
     const userInfo = {
       email,
       password,
@@ -44,18 +48,18 @@ export default function SignIn() {
       setPasswordError(true);
       setPasswordErrorMessage("Password is required");
     } else {
-      setEmailError(false);
-      setPasswordError(false);
-      axios
-        .post(`${process.env.REACT_APP_BASE_URL}user/login`, userInfo)
-        .then((res) => {
-          switch (res.data.message) {
-            case "Login Successful":
-              console.log(res);
+      try {
+        setEmailError(false);
+        setPasswordError(false);
 
-              const token = res.data.data;
-              const email = res.data.validuser.email;
-              const password = res.data.validuser.password;
+        const ResponseData = await loginUser(userInfo);
+        if (ResponseData) {
+          switch (ResponseData.message) {
+            case "Login Successful":
+              console.log(ResponseData);
+              const token = ResponseData.data;
+              const email = ResponseData.validuser.email;
+              const password = ResponseData.validuser.password;
               const userData = {
                 email,
                 password,
@@ -82,8 +86,10 @@ export default function SignIn() {
             default:
               break;
           }
-        })
-        .catch((error) => console.log(error));
+        }
+      } catch (error) {
+        console.log("Error In User Login Part", error);
+      }
     }
   };
 
@@ -166,4 +172,6 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export { LoginPage };

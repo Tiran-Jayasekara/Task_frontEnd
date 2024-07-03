@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "hooks/routes/useRouter";
 
 const TopBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -31,10 +31,15 @@ const TopBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const navigate = useNavigate();
-  const handleCloseNavMenu = (page: string) => {
-    console.log(page);
-    navigate("/" + page);
+  const { navigate } = useRouter();
+  const handleCloseNavMenu = (page: any) => {
+    if (page === "HOME") {
+      navigate("/home");
+    } else if (page === "ABOUT") {
+      navigate("/about");
+    } else if (page === "LOGIN") {
+      navigate("/login");
+    }
     setAnchorElNav(null);
   };
 
@@ -42,7 +47,7 @@ const TopBar = () => {
     setAnchorElUser(null);
   };
 
-  const pages = ["home", "about", "login"];
+  const pages = ["HOME", "ABOUT", "LOGIN"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   return (

@@ -1,19 +1,13 @@
 import { TopBar, CardDesign } from "components";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useUserStore } from "store";
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import { useUserStore } from "states/userStore";
+import { useTokenStore } from "states/tokenStore";
 
 function Home() {
   const userData = useUserStore((state) => state.user);
+  const token = useTokenStore((state) => state.token);
   console.log(userData);
+  console.log(token);
 
   return (
     <>
@@ -32,4 +26,4 @@ function Home() {
     </>
   );
 }
-export default Home;
+export { Home };
