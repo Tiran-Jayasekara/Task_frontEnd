@@ -11,12 +11,13 @@ import Box from "@mui/material/Box";
 import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { useTokenStore, useUserStore } from "../../store";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import { useTokenStore, useUserStore } from "store";
 const theme = {};
 
 export default function SignIn() {

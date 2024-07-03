@@ -130,4 +130,4 @@ const CardDesign = () => {
   );
 };
 
-export default CardDesign;
+export { CardDesign };
