@@ -44,9 +44,11 @@ const LoginPage = () => {
     if (email === "") {
       setEmailError(true);
       setEmailErrorMessage("Email is required");
+
     } else if (password === "") {
       setPasswordError(true);
       setPasswordErrorMessage("Password is required");
+
     } else {
       try {
         setEmailError(false);
@@ -56,7 +58,6 @@ const LoginPage = () => {
         if (ResponseData) {
           switch (ResponseData.message) {
             case "Login Successful":
-              console.log(ResponseData);
               const token = ResponseData.data;
               const email = ResponseData.validuser.email;
               const password = ResponseData.validuser.password;
@@ -64,7 +65,6 @@ const LoginPage = () => {
                 email,
                 password,
               };
-
               useTokenStore.setState({ token: token });
               setUser(userData);
               toast.success(`Login Successfull`);
